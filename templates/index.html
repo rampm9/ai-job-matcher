@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobMatch Checker - AI-Powered Resume Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">
+                <i class="fas fa-search-plus text-blue-600 mr-3"></i>
+                JobMatch Checker
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                AI-powered job matching with explainable results. Analyze how well resumes match job descriptions across multiple dimensions.
+            </p>
+        </div>
+
+        <!-- Main Application -->
+        <div x-data="jobMatcher()" class="max-w-7xl mx-auto">
+            <!-- Input Section -->
+            <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                <!-- Job Description -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-briefcase text-blue-600 text-xl mr-3"></i>
+                        <h2 class="text-2xl font-semibold text-gray-800">Job Description</h2>
+                    </div>
+                    <textarea 
+                        x-model="jobDescription"
+                        placeholder="Paste the job description here..."
+                        class="w-full h-64 p-4 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    ></textarea>
+                </div>
+
+                <!-- Resume/CV -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-user-tie text-green-600 text-xl mr-3"></i>
+                        <h2 class="text-2xl font-semibold text-gray-800">Resume/CV</h2>
+                    </div>
+                    <textarea 
+                        x-model="resume"
+                        placeholder="Paste the resume/CV content here..."
+                        class="w-full h-64 p-4 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    ></textarea>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="text-center mb-8">
+                <button 
+                    @click="analyzeMatch()"
+                    :disabled="loading || !jobDescription.trim() || !resume.trim()"
+                    class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    <span x-show="!loading" class="flex items-center">
+                        <i class="fas fa-magic mr-2"></i>
+                        Analyze Job Match
+                    </span>
+                    <span x-show="loading" class="flex items-center">
+                        <i class="fas fa-spinner fa-spin mr-2"></i>
+                        Analyzing...
+                    </span>
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div x-show="results" class="space-y-6" x-transition>
+                <!-- Overall Score -->
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Overall Match Score</h3>
+                    <div class="flex justify-center items-center space-x-6">
+                        <div class="text-6xl font-bold" :class="getScoreColor(results?.overall_score)">
+                            <span x-text="results?.overall_score"></span>%
+                        </div>
+                        <div class="text-left">
+                            <div class="text-xl font-semibold" :class="getTierColor(results?.tier)">
+                                <span x-text="results?.tier"></span>
+                            </div>
+                            <div x-show="results?.gated_by_must_haves" class="text-red-600 font-medium mt-2">
+                                <i class="fas fa-exclamation-triangle mr-1"></i>
+                                Missing Required Skills
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Component Breakdown -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-chart-bar text-blue-600 mr-3"></i>
+                        Score Breakdown
+                    </h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <template x-for="[key, value] in Object.entries(results?.components || {})" :key="key">
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm font-medium text-gray-600" x-text="formatComponentName(key)"></span>
+                                    <span class="text-lg font-bold" :class="getComponentColor(value)" x-text="value + '%'"></span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="h-2 rounded-full transition-all duration-500" 
+                                         :class="getComponentBarColor(value)"
+                                         :style="`width: ${Math.max(value, 2)}%`"></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Missing Requirements -->
+                <div x-show="results?.missing_must_haves?.length > 0" class="bg-red-50 border border-red-200 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-red-800 mb-4 flex items-center">
+                        <i class="fas fa-times-circle text-red-600 mr-3"></i>
+                        Missing Required Experience
+                    </h3>
+                    <ul class="space-y-2">
+                        <template x-for="requirement in results?.missing_must_haves" :key="requirement">
+                            <li class="flex items-center text-red-700">
+                                <i class="fas fa-minus-circle mr-2"></i>
+                                <span x-text="requirement"></span>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+
+                <!-- Improvements -->
+                <div x-show="results?.improvements?.length > 0" class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-yellow-800 mb-4 flex items-center">
+                        <i class="fas fa-lightbulb text-yellow-600 mr-3"></i>
+                        Improvement Suggestions
+                    </h3>
+                    <ul class="space-y-3">
+                        <template x-for="improvement in results?.improvements" :key="improvement">
+                            <li class="flex items-start text-yellow-700">
+                                <i class="fas fa-arrow-right mr-2 mt-1 text-yellow-600"></i>
+                                <span x-text="improvement"></span>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+
+                <!-- Disclaimer -->
+                <div class="bg-gray-50 rounded-xl p-6 text-center">
+                    <p class="text-sm text-gray-600 italic" x-text="results?.disclaimer"></p>
+                </div>
+            </div>
+
+            <!-- Error Display -->
+            <div x-show="error" class="bg-red-50 border border-red-200 rounded-xl p-6 text-center" x-transition>
+                <i class="fas fa-exclamation-triangle text-red-600 text-2xl mb-2"></i>
+                <p class="text-red-800 font-medium" x-text="error"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function jobMatcher() {
+            return {
+                jobDescription: '',
+                resume: '',
+                results: null,
+                loading: false,
+                error: null,
+
+                async analyzeMatch() {
+                    this.loading = true;
+                    this.error = null;
+                    this.results = null;
+
+                    try {
+                        const response = await fetch('/analyze', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                jd_text: this.jobDescription,
+                                cv_text: this.resume
+                            })
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        this.results = await response.json();
+                    } catch (err) {
+                        this.error = 'Failed to analyze job match. Please check your connection and try again.';
+                        console.error('Analysis error:', err);
+                    } finally {
+                        this.loading = false;
+                    }
+                },
+
+                formatComponentName(key) {
+                    return key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                },
+
+                getScoreColor(score) {
+                    if (score >= 80) return 'text-green-600';
+                    if (score >= 60) return 'text-yellow-600';
+                    return 'text-red-600';
+                },
+
+                getTierColor(tier) {
+                    if (tier?.includes('Strong') || tier?.includes('High')) return 'text-green-600';
+                    if (tier?.includes('Good') || tier?.includes('Medium')) return 'text-yellow-600';
+                    return 'text-red-600';
+                },
+
+                getComponentColor(value) {
+                    if (value >= 70) return 'text-green-600';
+                    if (value >= 40) return 'text-yellow-600';
+                    return 'text-red-600';
+                },
+
+                getComponentBarColor(value) {
+                    if (value >= 70) return 'bg-green-500';
+                    if (value >= 40) return 'bg-yellow-500';
+                    return 'bg-red-500';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

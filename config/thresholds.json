@@ -1,0 +1,21 @@
+{
+  "semantic_match_min": 0.65,
+  "tier_strong": 85,
+  "tier_good": 80,
+  "tier_possible": 70,
+  "tier_needs": 60,
+  "recency_weights": {
+    "0_3": 1.0,
+    "3_7": 0.6,
+    "7_inf": 0.3
+  },
+  "must_have_cap": 69,
+  "title_levels": {
+    "IC": 1,
+    "Senior": 2,
+    "Lead": 3,
+    "Manager": 3,
+    "Director": 4,
+    "Head": 4
+  }
+}

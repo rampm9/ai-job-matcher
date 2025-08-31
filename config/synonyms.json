@@ -1,0 +1,31 @@
+{
+  "llm": [
+    "large language model",
+    "foundation model",
+    "genai model"
+  ],
+  "javascript": [
+    "js"
+  ],
+  "sql": [
+    "postgres",
+    "mysql",
+    "bigquery"
+  ],
+  "prompt engineering": [
+    "prompt design",
+    "prompting",
+    "system prompt"
+  ],
+  "product management": [
+    "pm",
+    "product strategy",
+    "product discovery"
+  ],
+  "experimentation": [
+    "ab testing",
+    "a/b test",
+    "ab-test",
+    "experiments"
+  ]
+}
