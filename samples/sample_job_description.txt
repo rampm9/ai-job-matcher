@@ -1,32 +1,19 @@
 Senior Product Manager - AI/ML Products
 
-We are seeking an experienced Senior Product Manager to lead our AI/ML product initiatives. The ideal candidate will have 5+ years of product management experience, with deep expertise in machine learning products and data science.
-
-Responsibilities:
-- Own product roadmaps and PRDs for AI-powered features
-- Collaborate with ML engineers and data scientists to define product requirements
-- Define success metrics and KPIs for ML models in production
-- Lead cross-functional teams to deliver AI products that drive business impact
-- Conduct user research and market analysis for AI product opportunities
-- Work with stakeholders to prioritize features and manage technical debt
-- Drive A/B testing and experimentation for ML-driven features
+Seeking a Senior Product Manager with 5+ years experience to lead AI/ML product initiatives.
 
 Requirements:
-- Masters degree in Computer Science, Engineering, or related technical field
-- 5+ years of product management experience with technology products
-- Deep understanding of machine learning concepts and AI product development
-- Experience shipping ML products to production with measurable business impact
-- Strong analytical and quantitative skills with experience in data analysis
-- Excellent communication skills and ability to work with technical teams
-- Experience with A/B testing, experimentation, and statistical analysis
-- Must have experience with agile development methodologies
+- 5+ years product management experience
+- Deep understanding of machine learning and AI products
+- Experience with Python, SQL, and data analysis
+- Strong communication and leadership skills
+- Masters degree in Computer Science or related field
 
-Preferred Qualifications:
-- Experience with Python, SQL, and data visualization tools
-- Background in data science or machine learning engineering
-- Experience in B2B SaaS or enterprise software products
-- Track record of shipping products that handle large-scale data
+Responsibilities:
+- Own product roadmaps for AI-powered features
+- Collaborate with ML engineers and data scientists
+- Define KPIs for ML models in production
+- Lead cross-functional teams
 
-Location: San Francisco, CA or Remote (US timezone)
-Seniority: Senior Level (5-8 years experience)
+Location: San Francisco, CA or Remote
 Company: TechCorp AI Division

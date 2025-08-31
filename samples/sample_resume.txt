@@ -1,62 +1,25 @@
 John Smith
 Senior Product Manager
-Email: john.smith@email.com
-Phone: (555) 123-4567
 Location: San Francisco, CA
 
-PROFESSIONAL SUMMARY
-Results-driven Senior Product Manager with 6+ years of experience leading AI/ML product development. Proven track record of shipping machine learning products that generate significant business value. Deep technical background with hands-on experience in data science and product analytics.
+EXPERIENCE
+Senior Product Manager | TechCorp Inc. | 2020 - 2024
+• Led AI/ML product development for recommendation engine
+• Managed cross-functional teams of engineers and data scientists
+• Improved model accuracy by 20% through A/B testing
+• Shipped ML features used by 1M+ users
 
-WORK EXPERIENCE
-
-Senior Product Manager | TechCorp Inc. | San Francisco, CA | 2020 - 2024
-• Led product development for ML-powered recommendation engine, increasing user engagement by 35% and generating $2M in additional annual revenue
-• Managed cross-functional teams of 15+ engineers, designers, and data scientists to deliver 3 major AI features
-• Defined and tracked KPIs for machine learning models, improving model accuracy by 20% through systematic A/B testing
-• Collaborated with ML engineers to optimize model performance, reducing inference latency by 40%
-• Conducted extensive user research and market analysis that informed product roadmap for AI features
-• Shipped ML-driven personalization features used by 1M+ daily active users
-
-Product Manager | StartupXYZ | San Francisco, CA | 2018 - 2020
-• Built product roadmaps for data analytics platform serving enterprise customers
-• Worked closely with data science team to productize ML algorithms and statistical models
-• Led user research initiatives and gathered customer feedback to improve product-market fit
-• Managed product launches and go-to-market strategies for 2 major platform releases
-• Implemented A/B testing framework that increased conversion rates by 25%
-
-Associate Product Manager | BigTech Inc. | Mountain View, CA | 2016 - 2018
-• Supported senior PMs in feature development and product planning for consumer applications
-• Analyzed user data and product metrics to inform strategic product decisions
-• Assisted in A/B test design and statistical analysis for product experiments
-• Collaborated with engineering teams on technical specifications and implementation
+Product Manager | StartupXYZ | 2018 - 2020
+• Built product roadmaps for data analytics platform
+• Worked with data science team on ML algorithms
+• Led user research and product launches
 
 EDUCATION
-Master of Science in Computer Science | Stanford University | 2016
-Specialization: Machine Learning and Artificial Intelligence
-Thesis: "Deep Learning for Natural Language Processing in Search Applications"
+MS Computer Science - Machine Learning | Stanford University | 2016
+BS Electrical Engineering & Computer Science | UC Berkeley | 2014
 
-Bachelor of Science in Engineering | UC Berkeley | 2014
-Major: Electrical Engineering and Computer Science
-Cum Laude, GPA: 3.8/4.0
-
-TECHNICAL SKILLS
-• Programming: Python, SQL, R, JavaScript
-• ML/AI: TensorFlow, PyTorch, scikit-learn, pandas, numpy
-• Analytics: Tableau, Looker, Google Analytics, Adobe Analytics
-• Databases: PostgreSQL, MySQL, MongoDB, Redis
-• Cloud: AWS, Google Cloud Platform, Azure
-• Product Tools: Jira, Confluence, Figma, Mixpanel, Amplitude
-
-CERTIFICATIONS
-• Google Cloud Professional Machine Learning Engineer (2023)
-• Product Management Certificate - Stanford Continuing Studies (2019)
-
-ACHIEVEMENTS
-• Led team that won "Innovation Award" for AI-powered product feature (2023)
-• Speaker at ProductCon 2022: "Building ML Products That Users Love"
-• Patent holder: "System for Personalized Content Recommendation" (US Patent #10,xxx,xxx)
-
-PROJECTS
-• Built internal ML model performance dashboard used by 50+ data scientists
-• Authored company's ML product development playbook and best practices guide
-• Mentored 3 junior product managers and 2 data science interns
+SKILLS
+• Programming: Python, SQL, R
+• ML/AI: TensorFlow, PyTorch, scikit-learn
+• Analytics: Tableau, Google Analytics
+• Product Tools: Jira, Figma
